@@ -1,1 +1,3 @@
-# calculator-pt2
+# Rock-Paper-Scissors-Pt2
+
+rock paper scissors the right way
