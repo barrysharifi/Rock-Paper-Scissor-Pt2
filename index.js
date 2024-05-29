@@ -7,10 +7,6 @@ function getComputerChoice() {
 
 
 function playRound(playerSelection, computerSelection) {
-    console.log('player picked ' + playerSelection)
-    console.log('computer picked ' + computerSelection)
-    // playerSelection = playerSelection.toLowerCase();
-
     if (playerSelection === computerSelection) {
         return `It's a tie!`
     }
@@ -18,30 +14,72 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === 'rock' && computerSelection === 'scissors')
         || (playerSelection === 'paper' && computerSelection === 'rock')
         || (playerSelection === 'scissors' && computerSelection === 'paper')
+    
     ) {
+        playerScore++
         return "player wins!"
-    }
-    else {
+        
+    }else {
+        computerScore++
         return "computer wins!"
+        
     }
 
 }
+let playerScore = 0
+let computerScore = 0
 
+const rock = document.getElementById("btn-1")
+const paper = document.getElementById("btn-2")
+const scissor = document.getElementById("btn-3")
+const resultsDiv = document.getElementById("results")
 
+rock.addEventListener('click', ()=>{
+    const result = playerChoice('rock')
+    updateResults(result)
+ })
+ paper.addEventListener('click', ()=>{
+    const result = playerChoice('paper')
+    updateResults(result)
+ })
+ scissor.addEventListener('click', ()=>{
+    const result = playerChoice('scissors')
+    updateResults(result)
+ })
 
-function playerChoice() {
-    let input = prompt('Type Rock, Paper, or Scissors')
-    input = input.toLowerCase()
-    return input
+function playerChoice(playerSelection) {
+//     // let input = prompt('Type Rock, Paper, or Scissors')
+//     input = input.toLowerCase()
+//     return input
+if (playerScore === 5 || computerScore === 5){
+    return 
+}
+let computerChoice = getComputerChoice()
+return playRound(playerSelection, computerChoice)
+
 }
 
-
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const playerDecision = playerChoice()
-        const computerDecision = getComputerChoice()
-        console.log(playRound(playerDecision, computerDecision))
+function updateResults(result){
+    resultsDiv.innerHTML = `Player: ${playerScore} : Computer ${computerScore}`
+   
+    if (playerScore === 5){
+        resultsDiv.innerHTML += "<p>The Human Player wins the game!</p>"
+    } else if (computerScore === 5){
+        resultsDiv.innerHTML += "<p>The Computer wins the game!"
+    } else {
+        resultsDiv.innerHTML += `<p>${result}</p>`
     }
 }
-playGame()
+
+
+
+
+// function playGame() {
+//      for (let i = 0; i < 5; i++) {
+//         const playerDecision = playerChoice()
+//         const computerDecision = getComputerChoice()
+//         console.log(playRound(playerDecision, computerDecision))
+//      }
+// }
+// playGame()
 
